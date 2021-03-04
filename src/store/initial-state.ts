@@ -7,7 +7,20 @@ export interface IInitialState {
 const initialState: IInitialState = {
     bitcoin: {
         isFetching: false,
-        data: [],
+        data: {
+            time: {
+                updated: '',
+                updatedISO: '',
+                updateduk: '',
+                disclaimer: '',
+                chartName: ''
+            },
+            bpi: {
+                USD: null,
+                GBP: null,
+                EUR: null,
+            }
+        },
         error: null
     }
 };
