@@ -13,6 +13,11 @@ module.exports = {
                 options: { presets: ['@babel/env'] }
             },
             {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
                 test: /\.scss$/,
                 use: ['style-loader', 'css-loader']
             }
@@ -26,6 +31,7 @@ module.exports = {
     },
     devServer: {
         contentBase: path.join(__dirname, 'public/'),
+        historyApiFallback: true,
         port: 3000,
         publicPath: 'http://localhost:3000/dist/',
         hotOnly: true
