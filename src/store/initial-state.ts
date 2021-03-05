@@ -9,6 +9,8 @@ const initialState: IInitialState = {
         isFetching: false,
         data: {
             isDataUploaded: false,
+            isAscending: false,
+            isDescending: false,
             bitcoinData: {
                 time: {
                     updated: '',
@@ -17,29 +19,7 @@ const initialState: IInitialState = {
                     disclaimer: '',
                     chartName: ''
                 },
-                bpi: {
-                    USD: {
-                        code: '',
-                        symbol: '',
-                        rate: '',
-                        description: '',
-                        rate_float: 0
-                    },
-                    GBP: {
-                        code: '',
-                        symbol: '',
-                        rate: '',
-                        description: '',
-                        rate_float: 0
-                    },
-                    EUR: {
-                        code: '',
-                        symbol: '',
-                        rate: '',
-                        description: '',
-                        rate_float: 0
-                    },
-                }
+                bpi: []
             }
         },
         error: null

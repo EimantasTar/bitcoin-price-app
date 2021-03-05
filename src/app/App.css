@@ -21,6 +21,10 @@
     border-right: 2px solid white;
 }
 
+.rowWrapper {
+    height: 80px
+}
+
 .MuiTableCell-body {
     background-color: #eceff1;
 }
@@ -47,4 +51,12 @@
 
 .marginLeft {
     margin-left: 10px;
+}
+
+.MuiSvgIcon-root {
+    height: 0.5em;
+}
+
+.spacer {
+    min-width: 10px;
 }
