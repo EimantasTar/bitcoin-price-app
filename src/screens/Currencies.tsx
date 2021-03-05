@@ -2,6 +2,7 @@ import React, { Dispatch, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBitcoinPrice } from '../store/slices/bitcoin-slice';
 import {
+    Button,
     CircularProgress,
     Container,
     Grid,
@@ -18,29 +19,44 @@ import { Colors } from '../utils/constants/Colors';
 import moment from 'moment';
 import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import { Currency } from '../store/types/bitcoin-state';
+import { Formatter } from '../utils/functions/formatter';
+import { ascending, descending } from '../store/slices/bitcoin-slice';
 
 const Currencies: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
-    const { data: { isDataUploaded, bitcoinData: { time: { updatedISO }, bpi: { EUR, GBP, USD } } }, isFetching, error } = useSelector((state: IInitialState) => state.bitcoin);
+    const {
+        data: { isDataUploaded, isAscending, isDescending, bitcoinData: { time: { updatedISO }, bpi } },
+        isFetching,
+        error
+    } = useSelector((state: IInitialState) => state.bitcoin);
     const { t }: { t: TFunction } = useTranslation();
+    const { EUR, GBP, USD } = Formatter;
 
-    const formatterEUR = new Intl.NumberFormat('en-LT', {
-        style: 'currency',
-        currency: 'EUR',
-        minimumFractionDigits: 2
-    });
+    const handleAsc = () => {
+        if (!isAscending && !isDescending) {
+            dispatch(ascending());
+        } else if (isAscending) {
+            dispatch(descending());
+        } else if (isDescending) {
+            dispatch(ascending());
+        }
+    };
 
-    const formatterUSD = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 2
-    });
-
-    const formatterGBP = new Intl.NumberFormat('en-GB', {
-        style: 'currency',
-        currency: 'GBP',
-        minimumFractionDigits: 2
-    });
+    const prepareValue = (item: Currency) => {
+        const { code, rate_float } = item;
+        if (code === 'EUR') {
+            return EUR.format(rate_float);
+        }
+        if (code === 'GBP') {
+            return GBP.format(rate_float);
+        }
+        if (code === 'USD') {
+            return USD.format(rate_float);
+        } else return rate_float;
+    };
 
     useEffect(() => {
         dispatch(getBitcoinPrice());
@@ -51,7 +67,7 @@ const Currencies: React.FC = () => {
 
     return (
         <Container
-            maxWidth='xs'
+            maxWidth='sm'
             className='screenWrapper'
         >
             <Grid container justify='center'>
@@ -77,24 +93,54 @@ const Currencies: React.FC = () => {
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>
-                                <TableRow color={Colors.background}>
-                                    <TableCell className='cellWrapper'>{t('currenciesScreen.column1')}</TableCell>
-                                    <TableCell>{t('currenciesScreen.column2')}</TableCell>
+                                <TableRow className='rowWrapper' color={Colors.background}>
+                                    <TableCell className='cellWrapper'>
+                                        <Grid container justify='space-between' alignItems='center' direction='row'>
+                                            <div>
+                                                {t('currenciesScreen.column1')}
+                                            </div>
+                                            <div className='spacer' />
+                                        </Grid>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Grid container justify='space-between' alignItems='center' direction='row'>
+                                            <div>
+                                                {t('currenciesScreen.column2')}
+                                            </div>
+                                            <Button size='small' onClick={handleAsc}>
+                                                {
+                                                    !isAscending && !isDescending &&
+                                                    <Grid container direction='column' alignItems='center'>
+                                                        <ArrowDropUpIcon fontSize='small' />
+                                                        <ArrowDropDownIcon fontSize='small' />
+                                                    </Grid>
+                                                }
+                                                {
+                                                    isAscending && !isDescending &&
+                                                    <Grid container direction='column' alignItems='center'>
+                                                        <ArrowDropUpIcon fontSize='small' />
+                                                    </Grid>
+                                                }
+                                                {
+                                                    !isAscending && isDescending &&
+                                                    <Grid container direction='column' alignItems='center'>
+                                                        <ArrowDropDownIcon fontSize='small' />
+                                                    </Grid>
+                                                }
+                                            </Button>
+                                        </Grid>
+                                    </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                <TableRow>
-                                    <TableCell className='cellWrapper'>{EUR.code}</TableCell>
-                                    <TableCell>{formatterEUR.format(EUR.rate_float)}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell className='cellWrapper'>{GBP.code}</TableCell>
-                                    <TableCell>{formatterGBP.format(GBP.rate_float)}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell className='cellWrapper'>{USD.code}</TableCell>
-                                    <TableCell>{formatterUSD.format(USD.rate_float)}</TableCell>
-                                </TableRow>
+                                {
+                                    bpi.length && bpi.map((item: Currency) =>
+                                        <TableRow key={item.code}>
+                                            <TableCell className='cellWrapper'>{item.code}</TableCell>
+                                            <TableCell>{prepareValue(item)}</TableCell>
+                                        </TableRow>
+                                    )
+                                }
                             </TableBody>
                         </Table>
                     </TableContainer>

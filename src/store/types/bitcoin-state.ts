@@ -1,4 +1,4 @@
-interface Currency {
+export interface Currency {
     code: string,
     symbol: string,
     rate: string,
@@ -14,17 +14,15 @@ export interface BitcoinData {
         disclaimer: string,
         chartName: string
     },
-    bpi: {
-        USD: Currency | null,
-        GBP: Currency | null,
-        EUR: Currency | null,
-    }
+    bpi: Currency[]
 }
 
 export interface BitcoinState {
     isFetching: boolean,
     data: {
         isDataUploaded: boolean,
+        isAscending: boolean,
+        isDescending: boolean,
         bitcoinData: BitcoinData
     },
     error: null | string | Error
