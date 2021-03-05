@@ -1,13 +1,13 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Currencies from '../screens/Currencies';
 import { Paths } from '../utils/constants/Paths';
 import Analysis from '../screens/Analysis';
 import Header from '../components/Header';
 
-const App = () => {
+const App: React.FC = () => {
     const { ANALYSIS_PATH, CURRENCIES_PATH }: { ANALYSIS_PATH: string, CURRENCIES_PATH: string } = Paths;
 
     return (

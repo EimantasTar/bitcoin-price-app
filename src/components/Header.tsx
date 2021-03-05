@@ -3,10 +3,16 @@ import { Paths } from '../utils/constants/Paths';
 import { Grid, Link } from '@material-ui/core';
 import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 
 const Header: React.FC = () => {
     const { ANALYSIS_PATH, CURRENCIES_PATH }: { ANALYSIS_PATH: string, CURRENCIES_PATH: string } = Paths;
     const { t }: { t: TFunction } = useTranslation();
+    let history = useHistory();
+
+    const handleClick = (url: string) => {
+        history.push(url);
+    };
 
     return (
         <header className='appHeader'>
@@ -21,10 +27,10 @@ const Header: React.FC = () => {
                 <Grid item lg={3} md={4} sm={5} xs={4}>
                     <Grid container direction='row' justify='flex-start'>
                         <Grid item lg={6} md={6} sm={6} xs={12}>
-                            <Link href={CURRENCIES_PATH}>{t('header.currencies')}</Link>
+                            <Link onClick={() => handleClick(CURRENCIES_PATH)}>{t('header.currencies')}</Link>
                         </Grid>
                         <Grid item lg={6} md={6} sm={6} xs={12}>
-                            <Link href={ANALYSIS_PATH}>{t('header.analysis')}</Link>
+                            <Link onClick={() => handleClick(ANALYSIS_PATH)}>{t('header.analysis')}</Link>
                         </Grid>
                     </Grid>
                 </Grid>
