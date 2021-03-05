@@ -1,10 +1,16 @@
 import React from 'react';
+import { Container, Grid } from '@material-ui/core';
 
 const Analysis = () => {
     return (
-        <div className="ScreenWrapper">
-            <h2>Analysis!</h2>
-        </div>
+        <Container
+            maxWidth='lg'
+            className='screenWrapper'
+        >
+            <Grid container justify='center'>
+                <h2 className='title'>Analysis</h2>
+            </Grid>
+        </Container>
     )
 };
 

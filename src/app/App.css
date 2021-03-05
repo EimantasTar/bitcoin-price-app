@@ -1,0 +1,50 @@
+.appHeader {
+    background-color: #cfd8dc;
+    border-bottom: 1px solid lightgrey;
+    font-size: 20px;
+    padding: 0 0 0 30px;
+}
+
+.screenWrapper {
+    margin: 20px;
+    padding: 20px 0 50px 0;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.MuiTableCell-head {
+    background-color: #90a4ae;
+}
+
+.cellWrapper {
+    border-right: 2px solid white;
+}
+
+.MuiTableCell-body {
+    background-color: #eceff1;
+}
+
+.title {
+    alignment: center;
+    padding-bottom: 20px;
+}
+
+.commentWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    white-space: nowrap;
+}
+
+.comment {
+    padding-right: 5px;
+}
+
+.errorMessage {
+    color: red;
+}
+
+.marginLeft {
+    margin-left: 10px;
+}

@@ -8,17 +8,38 @@ const initialState: IInitialState = {
     bitcoin: {
         isFetching: false,
         data: {
-            time: {
-                updated: '',
-                updatedISO: '',
-                updateduk: '',
-                disclaimer: '',
-                chartName: ''
-            },
-            bpi: {
-                USD: null,
-                GBP: null,
-                EUR: null,
+            isDataUploaded: false,
+            bitcoinData: {
+                time: {
+                    updated: '',
+                    updatedISO: '',
+                    updateduk: '',
+                    disclaimer: '',
+                    chartName: ''
+                },
+                bpi: {
+                    USD: {
+                        code: '',
+                        symbol: '',
+                        rate: '',
+                        description: '',
+                        rate_float: 0
+                    },
+                    GBP: {
+                        code: '',
+                        symbol: '',
+                        rate: '',
+                        description: '',
+                        rate_float: 0
+                    },
+                    EUR: {
+                        code: '',
+                        symbol: '',
+                        rate: '',
+                        description: '',
+                        rate_float: 0
+                    },
+                }
             }
         },
         error: null

@@ -30,7 +30,8 @@ export const bitcoinSlice = createSlice({
         }));
         builder.addCase(getBitcoinPrice.fulfilled, ((state, { payload }) => {
             state.isFetching = false;
-            state.data = payload;
+            state.data.isDataUploaded = true;
+            state.data.bitcoinData = payload;
         }));
         builder.addCase(getBitcoinPrice.rejected, ((state, { payload }) => {
             state.isFetching = false;

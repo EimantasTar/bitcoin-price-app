@@ -1,10 +1,11 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
-import './App.scss';
+import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom';
 import Currencies from '../screens/Currencies';
 import { Paths } from '../utils/constants/Paths';
 import Analysis from '../screens/Analysis';
+import Header from '../components/Header';
 
 const App = () => {
     const { ANALYSIS_PATH, CURRENCIES_PATH }: { ANALYSIS_PATH: string, CURRENCIES_PATH: string } = Paths;
@@ -12,10 +13,7 @@ const App = () => {
     return (
         <div>
             <Router>
-                <header className='appHeader'>
-                    <Link className='link' to={CURRENCIES_PATH}>Currencies</Link>
-                    <Link className='link' to={ANALYSIS_PATH}>Analysis</Link>
-                </header>
+                <Header />
                 <Switch>
                     <Route
                         path='/'

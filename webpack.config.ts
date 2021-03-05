@@ -7,7 +7,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)|(ts|tsx)$/,
+                test: /\.(ts|tsx)$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 options: { presets: ['@babel/env'] }
@@ -18,7 +18,7 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.scss$/,
+                test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             }
         ]
