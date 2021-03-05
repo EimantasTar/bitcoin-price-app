@@ -23,6 +23,9 @@ export interface BitcoinData {
 
 export interface BitcoinState {
     isFetching: boolean,
-    data: BitcoinData,
+    data: {
+        isDataUploaded: boolean,
+        bitcoinData: BitcoinData
+    },
     error: null | string | Error
 }
