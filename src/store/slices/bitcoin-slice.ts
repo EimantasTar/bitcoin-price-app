@@ -1,7 +1,8 @@
 import { ActionCreatorWithoutPayload, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import initialState from '../initial-state';
 import { BITCOIN_URL } from '../../utils/constants/Urls';
-import { BitcoinState, Currency } from '../types/bitcoin-state';
+import { Currency } from '../types/bitcoin-state';
+import { sortArrAscending, sortArrDescending } from '../../utils/functions/sorting';
 
 const sliceName = 'bitcoin';
 
@@ -40,36 +41,18 @@ export const bitcoinSlice = createSlice({
     reducers: {
         ascending: (state) => {
             const { bpi }: { bpi: Currency[] } = state.data.bitcoinData
-            let sortedArr = [];
             if (bpi && bpi.length > 1) {
-                sortedArr = bpi.sort((a, b) => {
-                    if (a.rate_float > b.rate_float)
-                        return -1;
-                    else if (a.rate_float === b.rate_float)
-                        return 0;
-                    else
-                        return 1
-                });
                 state.data.isAscending = true;
                 state.data.isDescending = false;
-                state.data.bitcoinData.bpi = sortedArr;
+                state.data.bitcoinData.bpi = sortArrAscending(bpi);
             }
         },
         descending: (state) => {
             const { bpi }: { bpi: Currency[] } = state.data.bitcoinData
-            let sortedArr = [];
             if (bpi && bpi.length > 1) {
-                sortedArr = bpi.sort((a, b) => {
-                    if (a.rate_float < b.rate_float)
-                        return -1;
-                    else if (a.rate_float === b.rate_float)
-                        return 0;
-                    else
-                        return 1
-                });
                 state.data.isAscending = false;
                 state.data.isDescending = true;
-                state.data.bitcoinData.bpi = sortedArr;
+                state.data.bitcoinData.bpi = sortArrDescending(bpi);
             }
         }
     },
@@ -80,7 +63,7 @@ export const bitcoinSlice = createSlice({
         }));
         builder.addCase(getBitcoinPrice.fulfilled, ((state, { payload: { time, bpi: { EUR, GBP, USD } } }) => {
             const { isDescending, isAscending }: { isDescending: boolean, isAscending: boolean } = state.data;
-            let arr = [];
+            let arr: Currency[] = [];
             if (EUR && EUR.rate_float > 0) {
                 arr.push(EUR);
             }
@@ -91,24 +74,10 @@ export const bitcoinSlice = createSlice({
                 arr.push(USD);
             }
             if (isAscending) {
-                arr = arr.sort((a, b) => {
-                    if (a.rate_float > b.rate_float)
-                        return -1;
-                    else if (a.rate_float === b.rate_float)
-                        return 0;
-                    else
-                        return 1
-                });
+                arr = sortArrAscending(arr);
             }
             if (isDescending) {
-                arr = arr.sort((a, b) => {
-                    if (a.rate_float < b.rate_float)
-                        return -1;
-                    else if (a.rate_float === b.rate_float)
-                        return 0;
-                    else
-                        return 1
-                });
+                arr = sortArrDescending(arr);
             }
             state.isFetching = false;
             state.data.bitcoinData.time = time;
