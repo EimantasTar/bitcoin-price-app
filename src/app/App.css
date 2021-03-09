@@ -64,3 +64,20 @@
 .spacer {
     min-width: 10px;
 }
+
+.spacer2 {
+    min-width: 40px;
+}
+
+.formButtonWrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.tableWrapper {
+    margin-top: 20px;
+}
+
+.customWidth {
+    min-width: 150px;
+}
