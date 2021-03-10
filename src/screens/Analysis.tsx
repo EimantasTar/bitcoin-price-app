@@ -99,8 +99,10 @@ const Analysis: React.FC = () => {
                         <TableBody>
                             <TableRow>
                                 <TableCell className='cellWrapper'>{t('analysisScreen.row1')}</TableCell>
-                                <TableCell>{allUniqueTags.map(item => {
-                                    return `${item} `
+                                <TableCell>{allUniqueTags.map((item, number) => {
+                                    if ((allUniqueTags.length - 1) > number) {
+                                        return `${item}, `
+                                    } else return { item }
                                 })}</TableCell>
                             </TableRow>
                             <TableRow>
