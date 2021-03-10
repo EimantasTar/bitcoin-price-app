@@ -2,7 +2,7 @@ import { Currency } from '../../store/types/bitcoin-state';
 
 export const sortArrAscending = (arr: Currency[]) => {
     return arr.sort((a, b) => {
-        if (a.rate_float > b.rate_float)
+        if (a.rate_float < b.rate_float)
             return -1;
         else if (a.rate_float === b.rate_float)
             return 0;
@@ -13,7 +13,7 @@ export const sortArrAscending = (arr: Currency[]) => {
 
 export const sortArrDescending = (arr: Currency[]) => {
     return arr.sort((a, b) => {
-        if (a.rate_float < b.rate_float)
+        if (a.rate_float > b.rate_float)
             return -1;
         else if (a.rate_float === b.rate_float)
             return 0;

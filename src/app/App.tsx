@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader';
-import React from 'react';
+import * as React from "react"
 import './App.css';
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Currencies from '../screens/Currencies';
