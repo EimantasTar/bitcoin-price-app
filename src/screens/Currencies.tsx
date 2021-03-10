@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect, useState } from 'react';
+import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBitcoinPrice } from '../store/slices/bitcoin-slice';
 import {
@@ -24,6 +24,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Currency } from '../store/types/bitcoin-state';
 import { Formatter } from '../utils/functions/formatter';
 import { sortArrAscending, sortArrDescending } from '../utils/functions/sorting';
+import { Dispatch, useEffect, useState } from 'react';
 
 const Currencies: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();

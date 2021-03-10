@@ -12,6 +12,14 @@ jest.mock('react-router-dom', () => ({
     }),
 }));
 
+const mockTranslation = jest.fn();
+jest.mock('react-i18next', () => ({
+    ...jest.requireActual('react-i18next'),
+    useTranslation: () => ({
+        t: mockTranslation
+    }),
+}));
+
 const { CURRENCIES_PATH, ANALYSIS_PATH } = Paths;
 
 describe('Header', () => {

@@ -1,4 +1,4 @@
-import React, { Dispatch, FormEvent, useState } from 'react';
+import * as React from 'react';
 import {
     Button, CircularProgress,
     Container,
@@ -17,6 +17,7 @@ import { IInitialState } from '../store/initial-state';
 import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '../utils/constants/Colors';
+import { Dispatch, FormEvent, useState } from 'react';
 
 const Analysis: React.FC = () => {
     const [url, setUrl] = useState<string>('');
