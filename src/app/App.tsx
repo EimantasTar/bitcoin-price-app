@@ -1,7 +1,7 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Currencies from '../screens/Currencies';
 import { Paths } from '../utils/constants/Paths';
 import Analysis from '../screens/Analysis';
