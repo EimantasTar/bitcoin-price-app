@@ -100,12 +100,12 @@ const Analysis: React.FC = () => {
                             <TableRow>
                                 <TableCell className='cellWrapper'>{t('analysisScreen.row1')}</TableCell>
                                 <TableCell>{allUniqueTags.map(item => {
-                                    return `<${item}/> `
+                                    return `${item} `
                                 })}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell className='cellWrapper'>{t('analysisScreen.row2')}</TableCell>
-                                <TableCell>{`<${tagName}/>`}</TableCell>
+                                <TableCell>{`${tagName}`}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell className='cellWrapper'>{t('analysisScreen.row3')}</TableCell>
