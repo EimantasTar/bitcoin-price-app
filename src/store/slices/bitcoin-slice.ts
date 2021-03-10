@@ -6,7 +6,7 @@ import { sortArrAscending, sortArrDescending } from '../../utils/functions/sorti
 
 const sliceName = 'bitcoin';
 
-interface ResultState {
+export interface ResultState {
     time: {
         updated: string,
         updatedISO: string,
@@ -86,7 +86,9 @@ export const bitcoinSlice = createSlice({
         }));
         builder.addCase(getBitcoinPrice.rejected, ((state, { payload }) => {
             state.isFetching = false;
-            state.error = payload;
+            if (payload) {
+                state.error = payload;
+            }
         }))
     }
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react'
 import { Paths } from '../utils/constants/Paths';
 import { Grid, Link } from '@material-ui/core';
 import { TFunction } from 'i18next';

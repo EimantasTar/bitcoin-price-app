@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import initialState from '../initial-state';
 import {
     countTagUsageInEveryNode,
@@ -61,7 +61,7 @@ export const documentSlice = createSlice({
                 state.data.mostUsedTagInfo.count = count;
             } catch (error) {
                 const { message }: { message: string } = error;
-                getDocumentInfoFailureAction(message);
+                getDocumentInfoFailure(message);
             }
         }));
         builder.addCase(getDocumentInfo.rejected, ((state, { payload }) => {
@@ -73,4 +73,4 @@ export const documentSlice = createSlice({
     }
 });
 
-const { getDocumentInfoFailure: getDocumentInfoFailureAction } = documentSlice.actions;
+export const { getDocumentInfoFailure } = documentSlice.actions;
