@@ -18,7 +18,7 @@ import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '../utils/constants/Colors';
 
-const Analysis = () => {
+const Analysis: React.FC = () => {
     const [url, setUrl] = useState<string>('');
     const { t }: { t: TFunction } = useTranslation();
     const dispatch: Dispatch<any> = useDispatch();

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { documentSlice, getDocumentInfo, getDocumentInfoFailure } from '../document-slice';
 import { DocumentState } from '../../types/document-state';
 import initialState from '../../initial-state';
