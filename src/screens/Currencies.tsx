@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBitcoinPrice } from '../store/slices/bitcoin-slice';
 import {
@@ -23,12 +23,15 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Currency } from '../store/types/bitcoin-state';
 import { Formatter } from '../utils/functions/formatter';
-import { ascending, descending } from '../store/slices/bitcoin-slice';
+import { sortArrAscending, sortArrDescending } from '../utils/functions/sorting';
 
 const Currencies: React.FC = () => {
     const dispatch: Dispatch<any> = useDispatch();
+    const [isAscending, setIsAscending] = useState<boolean>(false);
+    const [isDescending, setIsDescending] = useState<boolean>(false);
+    const [btcData, setBtcData] = useState<Currency[]>([]);
     const {
-        data: { isDataUploaded, isAscending, isDescending, bitcoinData: { time: { updatedISO }, bpi } },
+        data: { isDataUploaded, bitcoinData: { time: { updatedISO }, bpi } },
         isFetching,
         error
     } = useSelector((state: IInitialState) => state.bitcoin);
@@ -36,12 +39,20 @@ const Currencies: React.FC = () => {
     const { EUR, GBP, USD } = Formatter;
 
     const handleAsc = () => {
-        if (!isAscending && !isDescending) {
-            dispatch(ascending());
-        } else if (isAscending) {
-            dispatch(descending());
-        } else if (isDescending) {
-            dispatch(ascending());
+        if (!isAscending && !isDescending && bpi && bpi.length > 1) {
+            const data: Currency[] = sortArrAscending(bpi);
+            setBtcData(data);
+            setIsAscending(true);
+        } else if (isAscending && bpi && bpi.length > 1) {
+            const data = sortArrDescending(bpi);
+            setBtcData(data);
+            setIsAscending(false);
+            setIsDescending(true);
+        } else if (isDescending && bpi && bpi.length > 1) {
+            const data: Currency[] = sortArrAscending(bpi);
+            setBtcData(data);
+            setIsAscending(true);
+            setIsDescending(false);
         }
     };
 
@@ -59,10 +70,25 @@ const Currencies: React.FC = () => {
     };
 
     useEffect(() => {
+        if (isAscending && bpi && bpi.length > 1) {
+            const btcData = sortArrAscending(bpi);
+            setBtcData(btcData);
+        } else if (isDescending && bpi && bpi.length > 1) {
+            const btcData: Currency[] = sortArrDescending(bpi);
+            setBtcData(btcData);
+        } else if (bpi && bpi.length > 0) {
+            setBtcData(bpi);
+        }
+    }, [bpi]);
+
+    useEffect(() => {
         dispatch(getBitcoinPrice());
-        setInterval(async () => {
+        const interval = setInterval(async () => {
             dispatch(getBitcoinPrice());
         }, 10000);
+        return () => {
+            clearInterval(interval);
+        }
     }, []);
 
     return (
@@ -78,7 +104,7 @@ const Currencies: React.FC = () => {
                     error && <p className='errorMessage'>{error}</p>
                 }
                 <div className='commentWrapper'>
-                    {isDataUploaded &&
+                    {isDataUploaded && btcData && btcData.length > 0 &&
                     <div className='commentWrapper'>
                         <p className='comment'>{t('currenciesScreen.comment')}</p>
                         <p className='comment'>{moment(updatedISO).format('YYYY-MM-DD HH:mm')}</p>
@@ -88,7 +114,7 @@ const Currencies: React.FC = () => {
                         isFetching && <CircularProgress className='marginLeft' size={15} />
                     }
                 </div>
-                {isDataUploaded
+                {isDataUploaded && btcData && btcData.length > 0
                     ?
                     <TableContainer component={Paper}>
                         <Table>
@@ -134,7 +160,7 @@ const Currencies: React.FC = () => {
                             </TableHead>
                             <TableBody>
                                 {
-                                    bpi.length && bpi.map((item: Currency) =>
+                                    btcData.length && btcData.map((item: Currency) =>
                                         <TableRow key={item.code}>
                                             <TableCell className='cellWrapper'>{item.code}</TableCell>
                                             <TableCell>{prepareValue(item)}</TableCell>
