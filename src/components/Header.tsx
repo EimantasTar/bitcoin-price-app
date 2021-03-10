@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 const Header: React.FC = () => {
     const { ANALYSIS_PATH, CURRENCIES_PATH }: { ANALYSIS_PATH: string, CURRENCIES_PATH: string } = Paths;
     const { t }: { t: TFunction } = useTranslation();
-    let history = useHistory();
+    const history = useHistory();
 
     const handleClick = (url: string) => {
         history.push(url);

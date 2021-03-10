@@ -33,11 +33,11 @@ export const findAllUniqueTags = (document: Document): string[] => {
     const xpathResult = document.evaluate(`//*`, document, null, XPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
     try {
         let thisNode: any = xpathResult.iterateNext();
-        let tagsArr: string[] = [];
+        const tagsArr: string[] = [];
         while (thisNode) {
             const { children }: { children: any } = thisNode;
             if (children && children.length > 0) {
-                for (let item of children) {
+                for (const item of children) {
                     let isUnique = false;
                     const { localName }: { localName: string } = item;
                     if (localName) {
@@ -60,7 +60,7 @@ const getPath = (parentElement: any | null, localName: string) => {
     let res = `/${localName}`;
     let element = parentElement;
     while (element) {
-        let { localName } = element;
+        const { localName } = element;
         res = `/${localName}${res}`;
         element = element.parentElement;
     }
@@ -71,7 +71,7 @@ export const countTagUsageInEveryNode = (tag: string, document: Document): { pat
     const xpathResult = document.evaluate(`//*`, document, null, XPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
     try {
         let thisNode: any = xpathResult.iterateNext();
-        let res = [];
+        const res = [];
         let path = '';
         while (thisNode) {
             const { parentElement, localName }: { parentElement: any | null, localName: string } = thisNode;

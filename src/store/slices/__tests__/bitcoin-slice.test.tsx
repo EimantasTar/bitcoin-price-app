@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { bitcoinSlice, ascending, descending, getBitcoinPrice, ResultState } from '../bitcoin-slice';
 import { BitcoinState } from '../../types/bitcoin-state';
 import initialState from '../../initial-state';
