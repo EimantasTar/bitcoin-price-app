@@ -21,8 +21,6 @@ export interface BitcoinState {
     isFetching: boolean,
     data: {
         isDataUploaded: boolean,
-        isAscending: boolean,
-        isDescending: boolean,
         bitcoinData: BitcoinData
     },
     error: null | string | Error

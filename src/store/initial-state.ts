@@ -11,8 +11,6 @@ const initialState: IInitialState = {
         isFetching: false,
         data: {
             isDataUploaded: false,
-            isAscending: false,
-            isDescending: false,
             bitcoinData: {
                 time: {
                     updated: '',

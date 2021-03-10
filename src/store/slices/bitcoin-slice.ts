@@ -1,8 +1,7 @@
-import { ActionCreatorWithoutPayload, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import initialState from '../initial-state';
 import { BITCOIN_URL } from '../../utils/constants/Urls';
 import { Currency } from '../types/bitcoin-state';
-import { sortArrAscending, sortArrDescending } from '../../utils/functions/sorting';
 
 const sliceName = 'bitcoin';
 
@@ -38,32 +37,14 @@ export const getBitcoinPrice = createAsyncThunk<ResultState, null, { rejectValue
 export const bitcoinSlice = createSlice({
     name: sliceName,
     initialState: initialState.bitcoin,
-    reducers: {
-        ascending: (state) => {
-            const { bpi }: { bpi: Currency[] } = state.data.bitcoinData
-            if (bpi && bpi.length > 1) {
-                state.data.isAscending = true;
-                state.data.isDescending = false;
-                state.data.bitcoinData.bpi = sortArrAscending(bpi);
-            }
-        },
-        descending: (state) => {
-            const { bpi }: { bpi: Currency[] } = state.data.bitcoinData
-            if (bpi && bpi.length > 1) {
-                state.data.isAscending = false;
-                state.data.isDescending = true;
-                state.data.bitcoinData.bpi = sortArrDescending(bpi);
-            }
-        }
-    },
+    reducers: {},
     extraReducers: builder => {
         builder.addCase(getBitcoinPrice.pending, ((state) => {
             state.isFetching = true;
             state.error = null;
         }));
         builder.addCase(getBitcoinPrice.fulfilled, ((state, { payload: { time, bpi: { EUR, GBP, USD } } }) => {
-            const { isDescending, isAscending }: { isDescending: boolean, isAscending: boolean } = state.data;
-            let arr: Currency[] = [];
+            const arr: Currency[] = [];
             if (EUR && EUR.rate_float > 0) {
                 arr.push(EUR);
             }
@@ -72,12 +53,6 @@ export const bitcoinSlice = createSlice({
             }
             if (USD && USD.rate_float > 0) {
                 arr.push(USD);
-            }
-            if (isAscending) {
-                arr = sortArrAscending(arr);
-            }
-            if (isDescending) {
-                arr = sortArrDescending(arr);
             }
             state.isFetching = false;
             state.data.bitcoinData.time = time;
@@ -92,11 +67,3 @@ export const bitcoinSlice = createSlice({
         }))
     }
 });
-
-export const {
-    ascending,
-    descending
-}: {
-    ascending: ActionCreatorWithoutPayload
-    descending: ActionCreatorWithoutPayload
-} = bitcoinSlice.actions;
