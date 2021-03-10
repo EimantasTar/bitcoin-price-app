@@ -102,7 +102,7 @@ const Analysis: React.FC = () => {
                                 <TableCell>{allUniqueTags.map((item, number) => {
                                     if ((allUniqueTags.length - 1) > number) {
                                         return `${item}, `
-                                    } else return { item }
+                                    } else return `${item}`
                                 })}</TableCell>
                             </TableRow>
                             <TableRow>
