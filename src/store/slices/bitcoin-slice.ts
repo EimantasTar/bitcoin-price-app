@@ -10,9 +10,10 @@ export interface ResultState {
         updated: string,
         updatedISO: string,
         updateduk: string,
-        disclaimer: string,
-        chartName: string
+
     },
+    disclaimer: string,
+    chartName: string,
     bpi: {
         USD: Currency,
         GBP: Currency,

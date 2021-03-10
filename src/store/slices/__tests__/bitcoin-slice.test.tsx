@@ -11,8 +11,6 @@ const expectedPending: BitcoinState = {
                 updated: '',
                 updatedISO: '',
                 updateduk: '',
-                disclaimer: '',
-                chartName: ''
             },
             bpi: []
         }
@@ -25,9 +23,9 @@ const result: ResultState = {
         updated: 'string',
         updatedISO: 'string',
         updateduk: 'string',
-        disclaimer: 'string',
-        chartName: 'string'
     },
+    disclaimer: 'string',
+    chartName: 'string',
     bpi: {
         USD: {
             code: 'USD',
@@ -58,9 +56,9 @@ const resultZeros: ResultState = {
         updated: 'string',
         updatedISO: 'string',
         updateduk: 'string',
-        disclaimer: 'string',
-        chartName: 'string'
     },
+    disclaimer: 'string',
+    chartName: 'string',
     bpi: {
         USD: {
             code: 'USD',
@@ -95,8 +93,6 @@ const expectedFulfilled: BitcoinState = {
                 updated: 'string',
                 updatedISO: 'string',
                 updateduk: 'string',
-                disclaimer: 'string',
-                chartName: 'string'
             },
             bpi: [
                 {
@@ -135,8 +131,6 @@ const expectedFulfilledNoCurrencies: BitcoinState = {
                 updated: 'string',
                 updatedISO: 'string',
                 updateduk: 'string',
-                disclaimer: 'string',
-                chartName: 'string'
             },
             bpi: []
         }

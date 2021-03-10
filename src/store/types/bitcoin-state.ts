@@ -11,8 +11,6 @@ export interface BitcoinData {
         updated: string,
         updatedISO: string,
         updateduk: string,
-        disclaimer: string,
-        chartName: string
     },
     bpi: Currency[]
 }

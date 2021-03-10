@@ -16,8 +16,6 @@ const initialState: IInitialState = {
                     updated: '',
                     updatedISO: '',
                     updateduk: '',
-                    disclaimer: '',
-                    chartName: ''
                 },
                 bpi: []
             }
