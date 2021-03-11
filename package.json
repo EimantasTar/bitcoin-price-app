@@ -29,6 +29,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^26.0.20",
     "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^8.0.0",
     "css-loader": "^5.1.1",
     "csv-loader": "^3.0.3",
     "enzyme": "^3.11.0",
